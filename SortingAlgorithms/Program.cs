@@ -21,6 +21,7 @@ namespace SortingAlgorithms
 
             SortArray(array, 0, array.Length - 1);
             Console.WriteLine();
+
             foreach(int val in array)
             {
                 Console.Write(val + " ");
@@ -64,35 +65,35 @@ namespace SortingAlgorithms
             
             int leftSubArrayIndex = 0;
             int rightSubArrayIndex = 0;
-            int newArrayIndex = startingIndex;
+            int sortedArrayIndex = startingIndex;
 
             while(leftSubArrayIndex < leftSubArrayLength && rightSubArrayIndex < rightSubArrayLength)
             {
                 if (leftSubArray[leftSubArrayIndex] <= rightSubArray[rightSubArrayIndex])
                 {
-                    startingArray[newArrayIndex] = leftSubArray[leftSubArrayIndex];
+                    startingArray[sortedArrayIndex] = leftSubArray[leftSubArrayIndex];
                     leftSubArrayIndex++;
-                    newArrayIndex++;
+                    sortedArrayIndex++;
                 }
                 else
                 {
-                    startingArray[newArrayIndex] = rightSubArray[rightSubArrayIndex];
+                    startingArray[sortedArrayIndex] = rightSubArray[rightSubArrayIndex];
                     rightSubArrayIndex++;
-                    newArrayIndex++;
+                    sortedArrayIndex++;
                 }
             }
 
             while(leftSubArrayIndex < leftSubArrayLength)
             {
-                startingArray[newArrayIndex] = leftSubArray[leftSubArrayIndex];
+                startingArray[sortedArrayIndex] = leftSubArray[leftSubArrayIndex];
                 leftSubArrayIndex++;
-                newArrayIndex++;
+                sortedArrayIndex++;
             }
             while(rightSubArrayIndex < rightSubArrayLength)
             {
-                startingArray[newArrayIndex] = rightSubArray[rightSubArrayIndex];
+                startingArray[sortedArrayIndex] = rightSubArray[rightSubArrayIndex];
                 rightSubArrayIndex++;
-                newArrayIndex++;
+                sortedArrayIndex++;
             }
         }
 
