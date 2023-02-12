@@ -11,8 +11,6 @@ namespace SortingAlgorithms
             string filePath = $"../../../ArrayValues/inputJagged.csv";
             ReadFile(filePath);
 
-            int count = 1;
-
             int[] array = new int[10];
             int middle = (array.Length) / 2;
 
@@ -22,8 +20,13 @@ namespace SortingAlgorithms
                 array[i] = i;
             }
 
-            int index = BinarySearch(array, 9, 0, array.Length - 1);
-            Console.WriteLine(index);
+            for(int i = 0; i < array.Length; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+            Console.WriteLine();
+
+            MergeSort(array, 0, array.Length - 1);
             /* 
             foreach (int i in array)
             {
@@ -50,69 +53,64 @@ namespace SortingAlgorithms
             StreamReader sr = new StreamReader(path);
         }
 
-        public static int[] MergeSort(int[] arr1, int[] arr2)
+        public static void MergeSort(int[] startingArray, int left, int right)
         {
-            //Check if array has one element
-            //
-            //
-            //Split the array
-            //int left = 0;
-            //int right = array.Length - 1;
-            //int middle = (right + left) / 2;
+            int mid = (right + left) / 2;
+            int[] leftSubArray = new int[mid - left + 1];
+            int[] rightSubArray = new int[right - mid];
 
-            //Create sub arrays from left and right
-            //left array needs to be 0 - middle
-            //right array needs to be middle + 1 - array.Length - 1
+            for (int i = left; i < leftSubArray.Length; i++)
+            {
+                leftSubArray[i] = startingArray[i];
+            }
+            for (int i = 0; i < rightSubArray.Length; i++)
+            {
+                rightSubArray[i] = startingArray[mid + i + 1];
+            }
+            
+            if(left < right)
+            {
+                Console.WriteLine("Left Array");
+                foreach (int val in leftSubArray)
+                {
+                    Console.Write(val + " ");
+                }
+                Console.WriteLine();
 
-            int[] sortedArray = new int[arr1.Length];
-            return sortedArray;
+                Console.WriteLine("Right Array");
+                foreach (int val in rightSubArray)
+                {
+                    Console.Write(val + " ");
+                }
+                Console.WriteLine();
+                MergeSort(startingArray, left, mid);
+                MergeSort(startingArray, mid + 1, right);
+                //SortArrays(startingArray, left, mid, right);
+            }
         }
 
-        public static int BinarySearch(int[] arr, int search, int startPoint, int endPoint)
+        public static int[] SortArrays(int[] arrayToSort, int left, int mid, int right)
         {
-            //Start at the array's middle value. If this value is the target, stop here
-            int middle = (arr.Length) / 2;
-
-            //If the middle value is greater than the target value, check the left (lesser) half of the
-            //array.If it is less, check the right(greater) half.
-            if (arr[middle] == search)
+            int firstIndex = 0;
+            int secondIndex = 0;
+            int sortedIndex = 0;
+            int[] sortedArray = new int[mid];
+            /*
+            while((firstIndex != arrayToSort.Length - 1) || (secondIndex != mid - 1))
             {
-                return middle;
-            }
-            else
-            {
-                if (search > arr[middle]) //Shared code
+                if (arrayToSort[firstIndex] < left])
                 {
-                    //Drop left half of array and search again
-                    //middle - array.length - 1
-                    int[] rightArray = new int[arr.Length - middle];
-                    startPoint = middle;
-                    endPoint = arr.Length - 1;
-
-                    return BinarySearch(rightArray, search, startPoint, endPoint);
+                    sortedArray[sortedIndex] = arrayToSort[firstIndex];
+                    sortedIndex++;
+                    firstIndex++;
                 }
-                /*else
+                else
                 {
-                    //Drop right half of array and search again
-                    int[] leftArray = new int[arr.Length - middle];
-                    for (int i = 0; i < leftArray.Length; i++)
-                    {
-                        leftArray[i] = arr[i];
-                    }
-                    Console.WriteLine();
-                    foreach (int i in leftArray)
-                    {
-                        Console.Write(i + " ");
-                    }
-                    Console.WriteLine();
-                    return BinarySearch(leftArray, search);
-            } */
-                return -1;
-            }
-
-        //Repeat steps 1 and 2 until you find the value or identify where the value should be.
-
-        //Return the value’s index, or a -1 if the value is missing from the array
+                    sortedArray[sortedIndex] = right];
+                    sortedIndex++;
+                    secondIndex++;
+                } */
+            return arrayToSort;
         }
     }
 }
