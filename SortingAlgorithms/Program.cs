@@ -56,12 +56,14 @@ namespace SortingAlgorithms
         public static void MergeSort(int[] startingArray, int left, int right)
         {
             int mid = (right + left) / 2;
+            int splitArrayIndex = left;
+
             int[] leftSubArray = new int[mid - left + 1];
             int[] rightSubArray = new int[right - mid];
 
             for (int i = left; i < leftSubArray.Length; i++)
             {
-                leftSubArray[i] = startingArray[i];
+                leftSubArray[i] = startingArray[i + left];
             }
             for (int i = 0; i < rightSubArray.Length; i++)
             {
