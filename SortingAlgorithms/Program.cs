@@ -32,16 +32,16 @@ namespace SortingAlgorithms
             StreamReader sr = new StreamReader(path);
         }
 
-        public static void SortArray(int[] array, int left, int right)
+        public static void SortArray(int[] array, int startingIndex, int endingIndex)
         {
-            int mid = (left + (right - 1)) / 2;
+            int mid = (startingIndex + (endingIndex - 1)) / 2;
 
-            if(left < right)
+            if(startingIndex < endingIndex)
             {
-                SortArray(array, left, mid);
-                SortArray(array, mid + 1, right);
+                SortArray(array, startingIndex, mid);
+                SortArray(array, mid + 1, endingIndex);
 
-                MergeSort(array, left, mid, right);
+                MergeSort(array, startingIndex, mid, endingIndex);
             }
         }
 
