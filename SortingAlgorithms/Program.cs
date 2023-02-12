@@ -26,6 +26,11 @@ namespace SortingAlgorithms
             {
                 Console.Write(val + " ");
             }
+
+            Console.WriteLine();
+            int index = BinarySearch(array, 0, array.Length - 1, 1009);
+            Console.WriteLine("Found Index");
+            Console.WriteLine(index);
         }
 
         public static void ReadFile(string path)
@@ -97,9 +102,22 @@ namespace SortingAlgorithms
             }
         }
 
-        public static void BinarySearch(int[] array, int startingIndex, int endingIndex)
-        {
+        public static int BinarySearch(int[] array, int startingIndex, int endingIndex, int searchedValue)
+        { 
+            int middlePoint = (endingIndex + startingIndex) / 2;
 
+            if (array[middlePoint] == searchedValue)
+            {
+                return middlePoint;
+            }
+            else if (array[middlePoint] > searchedValue)
+            {
+                return BinarySearch(array, startingIndex, middlePoint, searchedValue);
+            }
+            else
+            {
+                return BinarySearch(array, middlePoint + 1, endingIndex, searchedValue);
+            }
         }
     }
 }
