@@ -12,7 +12,6 @@ namespace SortingAlgorithms
             ReadFile(filePath);
 
             int[] array = { 45, 12, 90, 3, 1009, 32 };
-            int middle = (array.Length) / 2;
 
             for(int i = 0; i < array.Length; i++)
             {
@@ -20,26 +19,12 @@ namespace SortingAlgorithms
             }
             Console.WriteLine();
 
-            MergeSort(array, 0, array.Length - 1);
-            /* 
-            foreach (int i in array)
-            {
-                Console.WriteLine(i);
-            }
-
-            int[] newArray = new int[array.Length - middle];
-            for(int i = 0; i < newArray.Length; i++)
-            {
-                newArray[i] = array[middle];
-                middle++;
-            }
-
+            SortArray(array, 0, array.Length - 1);
             Console.WriteLine();
-
-            foreach(int i in newArray)
+            foreach(int val in array)
             {
-                Console.WriteLine($"{i}");
-            } */
+                Console.Write(val + " ");
+            }
         }
 
         public static void ReadFile(string path)
@@ -47,69 +32,67 @@ namespace SortingAlgorithms
             StreamReader sr = new StreamReader(path);
         }
 
-        public static void MergeSort(int[] startingArray, int left, int right)
+        public static void SortArray(int[] array, int left, int right)
         {
-            int mid = (right + left) / 2;
-            int leftArrayLength = mid - left + 1; 
-            int rightArrayLength = right - mid; 
+            int mid = (left + (right - 1)) / 2;
 
-            int[] leftSubArray = new int[leftArrayLength]; 
-            int[] rightSubArray = new int[rightArrayLength]; 
+            if(left < right)
+            {
+                SortArray(array, left, mid);
+                SortArray(array, mid + 1, right);
 
-            for (int i = 0; i < leftArrayLength; i++)
+                MergeSort(array, left, mid, right);
+            }
+        }
+
+        public static void MergeSort(int[] startingArray, int left, int mid, int right)
+        {
+            int leftSubArrayLength = mid - left + 1; 
+            int rightSubArrayLength = right - mid; 
+
+            int[] leftSubArray = new int[leftSubArrayLength]; 
+            int[] rightSubArray = new int[rightSubArrayLength]; 
+
+            for (int i = 0; i < leftSubArrayLength; i++)
             {
                 leftSubArray[i] = startingArray[i + left];
             }
-            for (int i = 0; i < rightArrayLength; i++)
+            for (int i = 0; i < rightSubArrayLength; i++)
             {
                 rightSubArray[i] = startingArray[mid + i + 1];
             }
             
-            if(left < right)
-            {
-                Console.WriteLine("Left Array");
-                foreach (int val in leftSubArray)
-                {
-                    Console.Write(val + " ");
-                }
-                Console.WriteLine();
-
-                Console.WriteLine("Right Array");
-                foreach (int val in rightSubArray)
-                {
-                    Console.Write(val + " ");
-                }
-                Console.WriteLine();
-                MergeSort(leftSubArray, left, mid); //left array, 0, 2
-
-                //Console.WriteLine("Right Merge");
-                //MergeSort(rightSubArray, mid + 1, right); //right array, 3, 5
-            }
-            
             int leftSubArrayIndex = 0;
             int rightSubArrayIndex = 0;
-            int newArrayIndex = 0;
+            int newArrayIndex = left;
 
-            while(leftSubArrayIndex < leftArrayLength && rightSubArrayIndex < rightArrayLength)
+            while(leftSubArrayIndex < leftSubArrayLength && rightSubArrayIndex < rightSubArrayLength)
             {
-                if (leftSubArray[leftSubArrayIndex] < rightSubArray[rightSubArrayIndex])
+                if (leftSubArray[leftSubArrayIndex] <= rightSubArray[rightSubArrayIndex])
                 {
-                    leftSubArray[leftSubArrayIndex] = startingArray[newArrayIndex];
+                    startingArray[newArrayIndex] = leftSubArray[leftSubArrayIndex];
                     leftSubArrayIndex++;
                     newArrayIndex++;
                 }
                 else
                 {
-                    rightSubArray[rightSubArrayIndex] = startingArray[newArrayIndex];
+                    startingArray[newArrayIndex] = rightSubArray[rightSubArrayIndex];
                     rightSubArrayIndex++;
                     newArrayIndex++;
                 }
             }
 
-            Console.WriteLine();
-            foreach(int val in startingArray)
+            while(leftSubArrayIndex < leftSubArrayLength)
             {
-                Console.Write(val + " ");
+                startingArray[newArrayIndex] = leftSubArray[leftSubArrayIndex];
+                leftSubArrayIndex++;
+                newArrayIndex++;
+            }
+            while(rightSubArrayIndex < rightSubArrayLength)
+            {
+                startingArray[newArrayIndex] = rightSubArray[rightSubArrayIndex];
+                rightSubArrayIndex++;
+                newArrayIndex++;
             }
         }
     }
