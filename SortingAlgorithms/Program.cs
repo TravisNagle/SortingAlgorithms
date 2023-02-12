@@ -14,9 +14,6 @@ namespace SortingAlgorithms
             int[] array = { 45, 12, 90, 3, 1009, 32 };
             int middle = (array.Length) / 2;
 
-
-            
-
             for(int i = 0; i < array.Length; i++)
             {
                 Console.Write(array[i] + " ");
@@ -53,11 +50,11 @@ namespace SortingAlgorithms
         public static void MergeSort(int[] startingArray, int left, int right)
         {
             int mid = (right + left) / 2;
-            int leftArrayLength = mid - left + 1;
-            int rightArrayLength = right - mid;
+            int leftArrayLength = mid - left + 1; 
+            int rightArrayLength = right - mid; 
 
-            int[] leftSubArray = new int[leftArrayLength];
-            int[] rightSubArray = new int[rightArrayLength];
+            int[] leftSubArray = new int[leftArrayLength]; 
+            int[] rightSubArray = new int[rightArrayLength]; 
 
             for (int i = 0; i < leftArrayLength; i++)
             {
@@ -83,8 +80,12 @@ namespace SortingAlgorithms
                     Console.Write(val + " ");
                 }
                 Console.WriteLine();
-            }
+                MergeSort(leftSubArray, left, mid); //left array, 0, 2
 
+                //Console.WriteLine("Right Merge");
+                //MergeSort(rightSubArray, mid + 1, right); //right array, 3, 5
+            }
+            
             int leftSubArrayIndex = 0;
             int rightSubArrayIndex = 0;
             int newArrayIndex = 0;
