@@ -45,26 +45,26 @@ namespace SortingAlgorithms
             }
         }
 
-        public static void MergeSort(int[] startingArray, int left, int mid, int right)
+        public static void MergeSort(int[] startingArray, int startingIndex, int middlePoint, int endingIndex)
         {
-            int leftSubArrayLength = mid - left + 1; 
-            int rightSubArrayLength = right - mid; 
+            int leftSubArrayLength = middlePoint - startingIndex + 1; 
+            int rightSubArrayLength = endingIndex - middlePoint; 
 
             int[] leftSubArray = new int[leftSubArrayLength]; 
             int[] rightSubArray = new int[rightSubArrayLength]; 
 
             for (int i = 0; i < leftSubArrayLength; i++)
             {
-                leftSubArray[i] = startingArray[i + left];
+                leftSubArray[i] = startingArray[i + startingIndex];
             }
             for (int i = 0; i < rightSubArrayLength; i++)
             {
-                rightSubArray[i] = startingArray[mid + i + 1];
+                rightSubArray[i] = startingArray[middlePoint + i + 1];
             }
             
             int leftSubArrayIndex = 0;
             int rightSubArrayIndex = 0;
-            int newArrayIndex = left;
+            int newArrayIndex = startingIndex;
 
             while(leftSubArrayIndex < leftSubArrayLength && rightSubArrayIndex < rightSubArrayLength)
             {
@@ -94,6 +94,11 @@ namespace SortingAlgorithms
                 rightSubArrayIndex++;
                 newArrayIndex++;
             }
+        }
+
+        public static void BinarySearch(int[] array, int startingIndex, int endingIndex)
+        {
+
         }
     }
 }
