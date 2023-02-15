@@ -10,26 +10,32 @@ namespace SortingAlgorithms
             int[][] jaggedArray = new int[20][];
             string filePath = $"../../../ArrayValues/inputJagged.csv";
 
-            int[] array = { 45, 12, 90, 3, 1009, 32 };
+            ReadFile(filePath, jaggedArray);
 
-            for(int i = 0; i < array.Length; i++)
+            Console.WriteLine("Unsorted Array");
+            for (int i = 0; i < jaggedArray.Length; i++)
             {
-                Console.Write(array[i] + " ");
-            }
-            Console.WriteLine();
-
-            SortArray(array, 0, array.Length - 1);
-            Console.WriteLine();
-
-            foreach(int val in array)
-            {
-                Console.Write(val + " ");
+                for (int j = 0; j < jaggedArray[i].Length; j++)
+                {
+                    Console.Write(jaggedArray[i][j] + " ");
+                }
+                Console.WriteLine();
             }
 
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                SortArray(jaggedArray[i], 0, jaggedArray[i].Length - 1);
+            }
             Console.WriteLine();
-            int index = BinarySearch(array, 0, array.Length - 1, -87);
-            Console.WriteLine("Found Index");
-            Console.WriteLine(index);
+            Console.WriteLine("Sorted Array");
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                for (int j = 0; j < jaggedArray[i].Length; j++)
+                {
+                    Console.Write(jaggedArray[i][j] + " ");
+                }
+                Console.WriteLine();
+            }
         }
 
         public static int[][] ReadFile(string filePath, int[][] jaggedArray)
