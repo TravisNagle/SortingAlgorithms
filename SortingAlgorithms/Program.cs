@@ -8,12 +8,9 @@ namespace SortingAlgorithms
         static void Main(string[] args)
         {
             int[][] jaggedArray = new int[20][];
-            int[] array = { 3, 28, 19, 12 };
             string filePath = $"../../../ArrayValues/inputJagged.csv";
 
             ReadFile(filePath, jaggedArray);
-            SortArray(array, 0, array.Length - 1);
-            int index = BinarySearch(array, 0, array.Length - 1, 19);
             
             Console.WriteLine("Unsorted Array");
             for (int i = 0; i < jaggedArray.Length; i++)
@@ -38,6 +35,12 @@ namespace SortingAlgorithms
                     Console.Write(jaggedArray[i][j] + " ");
                 }
                 Console.WriteLine();
+            }
+
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                int index = BinarySearch(jaggedArray[i], 0, jaggedArray[i].Length - 1, 256);
+                Console.WriteLine($"Row {i}: {index}");
             }
         }
 
@@ -134,17 +137,17 @@ namespace SortingAlgorithms
                 return -1;
             }
 
-            if (array[middlePoint] == searchedValue)
+            if (array[middlePoint] < searchedValue)
             {
-                return middlePoint;
+                return BinarySearch(array, middlePoint + 1, endingIndex, searchedValue);
             }
             else if (array[middlePoint] > searchedValue)
             {
-                return BinarySearch(array, startingIndex, middlePoint, searchedValue);
+                return BinarySearch(array, startingIndex, middlePoint - 1, searchedValue);
             }
             else
             {
-                return BinarySearch(array, middlePoint + 1, endingIndex, searchedValue);
+                return middlePoint;
             }
         }
     }
