@@ -9,7 +9,6 @@ namespace SortingAlgorithms
         {
             int[][] jaggedArray = new int[20][];
             string filePath = $"../../../ArrayValues/inputJagged.csv";
-            ReadFile(filePath);
 
             int[] array = { 45, 12, 90, 3, 1009, 32 };
 
@@ -28,14 +27,30 @@ namespace SortingAlgorithms
             }
 
             Console.WriteLine();
-            int index = BinarySearch(array, 0, array.Length - 1, 1009);
+            int index = BinarySearch(array, 0, array.Length - 1, -87);
             Console.WriteLine("Found Index");
             Console.WriteLine(index);
         }
 
-        public static void ReadFile(string path)
+        public static int[][] ReadFile(string filePath, int[][] jaggedArray)
         {
-            StreamReader sr = new StreamReader(path);
+            string text = "";
+            int counter = 0;
+            StreamReader reader = new StreamReader(filePath);
+
+            while(reader.Peek() != -1)
+            {
+                text = reader.ReadLine();
+                string[] fields = text.Split(",");
+
+                jaggedArray[counter] = new int[fields.Length];
+                for(int i = 0; i < jaggedArray[counter].Length; i++)
+                {
+                    jaggedArray[counter][i] = int.Parse(fields[i]);
+                }
+                counter++;
+            }
+            return jaggedArray;
         }
 
         public static void SortArray(int[] array, int startingIndex, int endingIndex)
@@ -54,7 +69,10 @@ namespace SortingAlgorithms
         public static void MergeSort(int[] startingArray, int startingIndex, int middlePoint, int endingIndex)
         {
             int leftSubArrayLength = middlePoint - startingIndex + 1; 
-            int rightSubArrayLength = endingIndex - middlePoint; 
+            int rightSubArrayLength = endingIndex - middlePoint;
+            int leftSubArrayIndex = 0;
+            int rightSubArrayIndex = 0;
+            int sortedArrayIndex = startingIndex;
 
             int[] leftSubArray = new int[leftSubArrayLength]; 
             int[] rightSubArray = new int[rightSubArrayLength]; 
@@ -67,10 +85,6 @@ namespace SortingAlgorithms
             {
                 rightSubArray[i] = startingArray[middlePoint + i + 1];
             }
-            
-            int leftSubArrayIndex = 0;
-            int rightSubArrayIndex = 0;
-            int sortedArrayIndex = startingIndex;
 
             while(leftSubArrayIndex < leftSubArrayLength && rightSubArrayIndex < rightSubArrayLength)
             {
