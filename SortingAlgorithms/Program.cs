@@ -21,6 +21,7 @@ namespace SortingAlgorithms
         static void Main(string[] args)
         {
             int[][] jaggedArray = new int[20][];
+            int searchingValue = 256;
             string filePath = $"../../../ArrayValues/inputJagged.csv";
 
             ReadFile(filePath, jaggedArray);
@@ -50,9 +51,10 @@ namespace SortingAlgorithms
                 Console.WriteLine();
             }
 
+            Console.WriteLine($"\nSearching for value: {searchingValue}");
             for (int i = 0; i < jaggedArray.Length; i++)
             {
-                int index = BinarySearch(jaggedArray[i], 0, jaggedArray[i].Length - 1, 256);
+                int index = BinarySearch(jaggedArray[i], 0, jaggedArray[i].Length - 1, searchingValue);
                 Console.WriteLine($"Row {i}: {index}");
             }
         }
@@ -67,19 +69,39 @@ namespace SortingAlgorithms
         {
             string text = "";
             int counter = 0;
-            StreamReader reader = new StreamReader(filePath);
+            StreamReader reader = null;
 
-            while(reader.Peek() != -1)
+            try
             {
-                text = reader.ReadLine();
-                string[] fields = text.Split(",");
+                reader = new StreamReader(filePath);
 
-                jaggedArray[counter] = new int[fields.Length];
-                for(int i = 0; i < jaggedArray[counter].Length; i++)
+                while (reader.Peek() != -1)
                 {
-                    jaggedArray[counter][i] = int.Parse(fields[i]);
+                    text = reader.ReadLine();
+                    string[] fields = text.Split(",");
+
+                    jaggedArray[counter] = new int[fields.Length];
+                    for (int i = 0; i < jaggedArray[counter].Length; i++)
+                    {
+                        jaggedArray[counter][i] = int.Parse(fields[i]);
+                    }
+                    counter++;
                 }
-                counter++;
+            }
+            catch(FileNotFoundException e)
+            {
+                Console.WriteLine($"Save file not found");
+            }
+            catch(NullReferenceException e)
+            {
+                Console.WriteLine("This save file is empty");
+            }
+            finally
+            {
+                if(reader != null)
+                {
+                    reader.Close();
+                }
             }
             return jaggedArray;
         }
