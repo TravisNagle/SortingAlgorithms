@@ -14,10 +14,13 @@ namespace SortingAlgorithms
 {
     internal class Program
     {
+        /// <summary>
+        /// Sorts and displays a jagged array filled with CSV file values. Displays index of 256 in arrays.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             int[][] jaggedArray = new int[20][];
-            int[] testArray = { 12, 5, 13, 145, 9, 0 };
             string filePath = $"../../../ArrayValues/inputJagged.csv";
 
             ReadFile(filePath, jaggedArray);
@@ -52,10 +55,14 @@ namespace SortingAlgorithms
                 int index = BinarySearch(jaggedArray[i], 0, jaggedArray[i].Length - 1, 256);
                 Console.WriteLine($"Row {i}: {index}");
             }
+        }
 
-            SortArray(testArray, 0, testArray.Length - 1);
-            string[] test = { "word", "words" };        }
-
+        /// <summary>
+        /// Reads in CSV file and fills in the jagged array with the CSV values
+        /// </summary>
+        /// <param name="filePath">Path to CSV file</param>
+        /// <param name="jaggedArray">Created jagged array</param>
+        /// <returns>Jagged array with CSV values</returns>
         public static int[][] ReadFile(string filePath, int[][] jaggedArray)
         {
             string text = "";
