@@ -17,7 +17,7 @@ namespace SortingAlgorithms
         /// <summary>
         /// Sorts and displays a jagged array filled with CSV file values. Displays index of 256 in arrays.
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Command line parameters</param>
         static void Main(string[] args)
         {
             int[][] jaggedArray = new int[20][];
