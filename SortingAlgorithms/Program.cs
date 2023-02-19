@@ -12,6 +12,9 @@ using System.Reflection;
 
 namespace SortingAlgorithms
 {
+    /// <summary>
+    /// Main class that handles all sorting, searching, and file reading in the program
+    /// </summary>
     internal class Program
     {
         /// <summary>
