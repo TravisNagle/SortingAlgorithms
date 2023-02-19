@@ -84,6 +84,12 @@ namespace SortingAlgorithms
             return jaggedArray;
         }
 
+        /// <summary>
+        /// First half of merge sort, splits array indexes in half 
+        /// </summary>
+        /// <param name="array">Array to split</param>
+        /// <param name="startingIndex">First index of split array</param>
+        /// <param name="endingIndex">Last index of split array</param>
         public static void SortArray(int[] array, int startingIndex, int endingIndex)
         {
             int mid = (startingIndex + endingIndex) / 2;
@@ -97,6 +103,15 @@ namespace SortingAlgorithms
             } 
         }
 
+        /// <summary>
+        /// Second half of merge sort, fills in sub arrays for the left and right half of the starting array. Once split up,
+        /// values are compared to check if the left sub array values are greater than or less than the right sub array. The array
+        /// is then reconstructed based on this criteria.
+        /// </summary>
+        /// <param name="startingArray">The original array</param>
+        /// <param name="startingIndex">First index of array</param>
+        /// <param name="middlePoint">Halfway point of entire array</param>
+        /// <param name="endingIndex">Last index of array</param>
         public static void MergeSort(int[] startingArray, int startingIndex, int middlePoint, int endingIndex)
         {
             int leftSubArrayLength = middlePoint - startingIndex + 1; 
