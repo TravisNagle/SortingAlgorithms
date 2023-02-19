@@ -162,6 +162,15 @@ namespace SortingAlgorithms
             }
         }
 
+        /// <summary>
+        /// Recursively searches for a value in the jagged array by splitting the index values in half and
+        /// checking if the midpoint is greater than, less than, or equal to the searched for value.
+        /// </summary>
+        /// <param name="array">Array to be searched</param>
+        /// <param name="startingIndex">First index of array</param>
+        /// <param name="endingIndex">Last index of array</param>
+        /// <param name="searchedValue">Value being searched for</param>
+        /// <returns>Index of the found value or -1 if not found</returns>
         public static int BinarySearch(int[] array, int startingIndex, int endingIndex, int searchedValue)
         { 
             int middlePoint = (endingIndex + startingIndex) / 2;
