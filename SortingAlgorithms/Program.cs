@@ -1,4 +1,13 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////////
+//
+// Author: Travis Nagle, Naglet@etsu.edu
+// Course: CSCI-2210-001 - Data Structures
+// Assignment: Project 2 - Sorting Algorithms
+// Description: Sorts a jagged array using the merge sort algorithm and searches for values using binary search
+//
+///////////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Reflection;
 
 namespace SortingAlgorithms
@@ -8,6 +17,7 @@ namespace SortingAlgorithms
         static void Main(string[] args)
         {
             int[][] jaggedArray = new int[20][];
+            int[] testArray = { 12, 5, 13, 145, 9, 0 };
             string filePath = $"../../../ArrayValues/inputJagged.csv";
 
             ReadFile(filePath, jaggedArray);
@@ -42,7 +52,9 @@ namespace SortingAlgorithms
                 int index = BinarySearch(jaggedArray[i], 0, jaggedArray[i].Length - 1, 256);
                 Console.WriteLine($"Row {i}: {index}");
             }
-        }
+
+            SortArray(testArray, 0, testArray.Length - 1);
+            string[] test = { "word", "words" };        }
 
         public static int[][] ReadFile(string filePath, int[][] jaggedArray)
         {
@@ -67,7 +79,7 @@ namespace SortingAlgorithms
 
         public static void SortArray(int[] array, int startingIndex, int endingIndex)
         {
-            int mid = (startingIndex + (endingIndex - 1)) / 2;
+            int mid = (startingIndex + endingIndex) / 2;
 
             if(startingIndex < endingIndex)
             {
@@ -75,7 +87,7 @@ namespace SortingAlgorithms
                 SortArray(array, mid + 1, endingIndex);
 
                 MergeSort(array, startingIndex, mid, endingIndex);
-            }
+            } 
         }
 
         public static void MergeSort(int[] startingArray, int startingIndex, int middlePoint, int endingIndex)
@@ -131,7 +143,7 @@ namespace SortingAlgorithms
         public static int BinarySearch(int[] array, int startingIndex, int endingIndex, int searchedValue)
         { 
             int middlePoint = (endingIndex + startingIndex) / 2;
-
+            
             if(endingIndex < startingIndex)
             {
                 return -1;
